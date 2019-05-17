@@ -178,7 +178,7 @@ class NNGPKernel(object):
         current_qaa = self.weight_var * tf.convert_to_tensor(
             [1.], dtype=tf.float64) + self.bias_var
       self.layer_qaa_dict = {0: current_qaa}
-      for l in xrange(self.depth):
+      for l in range(self.depth):
         with tf.name_scope("layer_%d" % l):
           samp_qaa = interp.interp_lin(
               self.var_aa_grid, self.qaa_grid, current_qaa)
@@ -222,7 +222,7 @@ class NNGPKernel(object):
                   batch_size * b_x : batch_size * (b_x + 1), :]
               corr_flat_batch = tf.reshape(corr_flat_batch, [-1])
 
-              for l in xrange(self.depth):
+              for l in range(self.depth):
                 with tf.name_scope("layer_%d" % l):
                   q_aa = self.layer_qaa_dict[l]
                   q_ab = interp.interp_lin_2d(x=self.var_aa_grid,
@@ -240,7 +240,7 @@ class NNGPKernel(object):
       else:
         with tf.name_scope("q_ab"):
           corr_flat = tf.reshape(corr, [-1])
-          for l in xrange(self.depth):
+          for l in range(self.depth):
             with tf.name_scope("layer_%d" % l):
               q_aa = self.layer_qaa_dict[l]
               q_ab = interp.interp_lin_2d(x=self.var_aa_grid,
